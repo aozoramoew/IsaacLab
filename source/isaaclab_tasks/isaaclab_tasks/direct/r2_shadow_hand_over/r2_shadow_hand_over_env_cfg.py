@@ -261,7 +261,7 @@ class R2ShadowHandOverEnvCfg(DirectMARLEnvCfg):
         },
     )
     # scene
-    scene: InteractiveSceneCfg = InteractiveSceneCfg(num_envs=2048, env_spacing=1.5, replicate_physics=True)
+    scene: InteractiveSceneCfg = InteractiveSceneCfg(num_envs=512, env_spacing=1.5, replicate_physics=True)
 
     # reset
     reset_position_noise = 0.01  # range of position at reset
