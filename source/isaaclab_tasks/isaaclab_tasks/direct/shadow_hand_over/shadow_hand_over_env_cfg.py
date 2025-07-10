@@ -22,7 +22,6 @@ from isaaclab.utils import configclass
 @configclass
 class EventCfg:
     """Configuration for randomization."""
-
     # -- robot
     # -right hand
     right_robot_physics_material = EventTerm(
@@ -146,7 +145,6 @@ class EventCfg:
             "distribution": "uniform",
         },
     )
-
     # -- scene
     reset_gravity = EventTerm(
         func=mdp.randomize_physics_scene_gravity,
@@ -159,9 +157,6 @@ class EventCfg:
             "distribution": "gaussian",
         },
     )
-
-
-
 @configclass
 class ShadowHandOverEnvCfg(DirectMARLEnvCfg):
     # env
