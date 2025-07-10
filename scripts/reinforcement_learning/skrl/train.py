@@ -201,7 +201,7 @@ def main(env_cfg: ManagerBasedRLEnvCfg | DirectRLEnvCfg | DirectMARLEnvCfg, agen
 
     # close the simulator
     env.close()
-    write.close()
+    writer.close()
 
 
 if __name__ == "__main__":
