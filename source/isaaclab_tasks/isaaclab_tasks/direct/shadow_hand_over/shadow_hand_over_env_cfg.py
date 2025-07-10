@@ -24,7 +24,8 @@ class EventCfg:
     """Configuration for randomization."""
 
     # -- robot
-    robot_physics_material = EventTerm(
+    # -right hand
+    right_robot_physics_material = EventTerm(
         func=mdp.randomize_rigid_body_material,
         mode="reset",
         min_step_count_between_reset=720,
@@ -36,7 +37,7 @@ class EventCfg:
             "num_buckets": 250,
         },
     )
-    robot_joint_stiffness_and_damping = EventTerm(
+    right_robot_joint_stiffness_and_damping = EventTerm(
         func=mdp.randomize_actuator_gains,
         min_step_count_between_reset=720,
         mode="reset",
@@ -48,7 +49,7 @@ class EventCfg:
             "distribution": "log_uniform",
         },
     )
-    robot_joint_pos_limits = EventTerm(
+    right_robot_joint_pos_limits = EventTerm(
         func=mdp.randomize_joint_parameters,
         min_step_count_between_reset=720,
         mode="reset",
@@ -60,7 +61,7 @@ class EventCfg:
             "distribution": "gaussian",
         },
     )
-    robot_tendon_properties = EventTerm(
+    right_robot_tendon_properties = EventTerm(
         func=mdp.randomize_fixed_tendon_parameters,
         min_step_count_between_reset=720,
         mode="reset",
@@ -72,7 +73,55 @@ class EventCfg:
             "distribution": "log_uniform",
         },
     )
-
+    # -left hand
+    left_robot_physics_material = EventTerm(
+        func=mdp.randomize_rigid_body_material,
+        mode="reset",
+        min_step_count_between_reset=720,
+        params={
+            "asset_cfg": SceneEntityCfg("left_hand"),
+            "static_friction_range": (0.7, 1.3),
+            "dynamic_friction_range": (1.0, 1.0),
+            "restitution_range": (1.0, 1.0),
+            "num_buckets": 250,
+        },
+    )
+    left_robot_joint_stiffness_and_damping = EventTerm(
+        func=mdp.randomize_actuator_gains,
+        min_step_count_between_reset=720,
+        mode="reset",
+        params={
+            "asset_cfg": SceneEntityCfg("left_hand", joint_names=".*"),
+            "stiffness_distribution_params": (0.75, 1.5),
+            "damping_distribution_params": (0.3, 3.0),
+            "operation": "scale",
+            "distribution": "log_uniform",
+        },
+    )
+    left_robot_joint_pos_limits = EventTerm(
+        func=mdp.randomize_joint_parameters,
+        min_step_count_between_reset=720,
+        mode="reset",
+        params={
+            "asset_cfg": SceneEntityCfg("left_hand", joint_names=".*"),
+            "lower_limit_distribution_params": (0.00, 0.01),
+            "upper_limit_distribution_params": (0.00, 0.01),
+            "operation": "add",
+            "distribution": "gaussian",
+        },
+    )
+    left_robot_tendon_properties = EventTerm(
+        func=mdp.randomize_fixed_tendon_parameters,
+        min_step_count_between_reset=720,
+        mode="reset",
+        params={
+            "asset_cfg": SceneEntityCfg("left_hand", fixed_tendon_names=".*"),
+            "stiffness_distribution_params": (0.75, 1.5),
+            "damping_distribution_params": (0.3, 3.0),
+            "operation": "scale",
+            "distribution": "log_uniform",
+        },
+    )
     # -- object
     object_physics_material = EventTerm(
         func=mdp.randomize_rigid_body_material,
@@ -110,6 +159,7 @@ class EventCfg:
             "distribution": "gaussian",
         },
     )
+
 
 
 @configclass
