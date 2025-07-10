@@ -16,7 +16,7 @@ from . import agents
 ##
 
 gym.register(
-    id="Isaac-R2-Shadow-Hand-Over-Direct-v0",
+    id="Isaac-Shadow-Hand-Over-Direct-v0",
     entry_point=f"{__name__}.r2_shadow_hand_over_env:R2ShadowHandOverEnv",
     disable_env_checker=True,
     kwargs={
