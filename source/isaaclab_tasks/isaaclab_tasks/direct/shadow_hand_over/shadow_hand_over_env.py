@@ -24,6 +24,7 @@ class ShadowHandOverEnv(DirectMARLEnv):
     cfg: ShadowHandOverEnvCfg
 
     def __init__(self, cfg: ShadowHandOverEnvCfg, render_mode: str | None = None, **kwargs):
+        print("Using custom task modifications.")
         super().__init__(cfg, render_mode, **kwargs)
 
         self.num_hand_dofs = self.right_hand.num_joints
