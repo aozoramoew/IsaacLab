@@ -166,8 +166,6 @@ def main(env_cfg: ManagerBasedRLEnvCfg | DirectRLEnvCfg | DirectMARLEnvCfg, agen
     resume_path = retrieve_file_path(args_cli.checkpoint) if args_cli.checkpoint else None
 
     # create isaac environment
-    if args.task == 'MyCustomTask':
-        env = gym.make('Isaac-R2-Shadow-Hand-Over-Direct-v0')
     env = gym.make(args_cli.task, cfg=env_cfg, render_mode="rgb_array" if args_cli.video else None)
 
     # convert to single-agent instance if required by the RL algorithm
