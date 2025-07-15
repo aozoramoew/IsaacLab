@@ -18,6 +18,9 @@ import sys
 import torch
 from torch.utils.tensorboard import SummaryWriter
 
+import os
+from datetime import datetime
+
 from isaaclab.app import AppLauncher
 
 # add argparse arguments
@@ -117,7 +120,10 @@ def main(env_cfg: ManagerBasedRLEnvCfg | DirectRLEnvCfg | DirectMARLEnvCfg, agen
     env_cfg.scene.num_envs = args_cli.num_envs if args_cli.num_envs is not None else env_cfg.scene.num_envs
     env_cfg.sim.device = args_cli.device if args_cli.device is not None else env_cfg.sim.device
     
-    writer = SummaryWriter(log_dir='/root/.nvidia-omniverse/logs')
+    log_dir = f'/root/.nvidia-omniverse/logs/run_{datetime.now().strftime("%Y%m%d_%H%M%S")}'
+
+    # Initialize the SummaryWriter to save logs in the unique subdirectory
+    writer = SummaryWriter(log_dir=log_dir)
 
 
     # multi-gpu training config
