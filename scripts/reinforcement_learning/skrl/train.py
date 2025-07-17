@@ -125,7 +125,7 @@ def main(env_cfg: ManagerBasedRLEnvCfg | DirectRLEnvCfg | DirectMARLEnvCfg, agen
     save_log_dir = f'/root/.nvidia-omniverse/logs/run_{datetime.now().strftime("%Y%m%d_%H%M%S")}'
 
     # Initialize the SummaryWriter to save logs in the unique subdirectory
-    writer = SummaryWriter(save_log_dir=log_dir)
+    writer = SummaryWriter(log_dir=save_log_dir)
 
     # multi-gpu training config
     if args_cli.distributed:
